@@ -6,7 +6,7 @@ use Config\Container;
 use ConstantsModule\DestinationTileAPIs;
 use Monolog\Logger;
 
-require_once(__DIR__ . '/../libs/OAuth.php');
+require_once(__DIR__ . '/../lib/OAuth.php');
 
 class YelpService
 {
