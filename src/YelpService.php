@@ -2,7 +2,6 @@
 
 namespace DestinationServicesModule;
 
-use Config\Container;
 use ConstantsModule\DestinationTileAPIs;
 use Monolog\Logger;
 
@@ -22,6 +21,7 @@ class YelpService
 	private $log;
 	/** @var DestinationApiLogger $dbLogger */
 	private $dbLogger;
+	private $settings;
 
 	public function __construct(ADestinationApiLogger $dbLogger)
 	{
@@ -77,7 +77,7 @@ class YelpService
 	 * @param    $businessId    The ID of the business to query
 	 * @return   The JSON response from the request
 	 */
-	function getBusiness($businessId)
+	public function getBusiness($businessId)
 	{
 		$businessPath = self::BUSINESS_PATH . urlencode($businessId);
 
@@ -92,12 +92,12 @@ class YelpService
 	 * @param    $path    The path of the APi after the domain
 	 * @return   The JSON response from the request
 	 */
-	function request($host, $path)
+	private function request($host, $path)
 	{
 		$unsignedUrl = "https://" . $host . $path;
 		$this->dbLogger->setCalledUrl($unsignedUrl);
-		$token = new \OAuthToken(Container::$config['yelp_token'], Container::$config['yelp_token_secret']);
-		$consumer = new \OAuthConsumer(Container::$config['yelp_consumer_key'], Container::$config['yelp_consumer_secret']);
+		$token = new \OAuthToken($this->settings['token'], $this->settings['secret']);
+		$consumer = new \OAuthConsumer($this->settings['consumerKey'], $this->settings['consumerSecret']);
 
 		// Yelp uses HMAC SHA1 encoding
 		$signatureMethod = new \OAuthSignatureMethod_HMAC_SHA1();
@@ -140,5 +140,14 @@ class YelpService
 		return $data;
 	}
 
+	public function setSettings($consumerKey, $consumerSecret, $token, $secret)
+	{
+		$this->settings = array(
+			'consumerKey'    => $consumerKey,
+			'consumerSecret' => $consumerSecret,
+			'token'          => $token,
+			'secret'         => $secret
+		);
+	}
 
 }
