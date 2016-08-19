@@ -5,7 +5,7 @@ namespace DestinationServicesModule;
 abstract class ADestinationApiLogger
 {
 
-	private $data = array(
+	protected $data = array(
 		'fsid'          => NULL,
 		'service_type'  => NULL,
 		'called_url'    => NULL,
