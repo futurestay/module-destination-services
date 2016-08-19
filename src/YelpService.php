@@ -23,39 +23,39 @@ class YelpService
 	/** @var DestinationApiLogger $dbLogger */
 	private $dbLogger;
 
-	public function __construct()
+	public function __construct(ADestinationApiLogger $dbLogger)
 	{
 		\Logger::configure(__DIR__ . '/../config/destination_content.xml');
 		$this->log = \Logger::getLogger('yelpDestinationContentLogger');
 
-		$this->dbLogger = new \Services\DestinationApiLogger();
+		$this->dbLogger = $dbLogger;
 		$this->dbLogger->setServiceType(DestinationTileAPIs::YELP);
 	}
 
 	/**
 	 * Queries the API by the input values from the user
 	 *
-	 * @param    $term        The search term to query
-	 * @param    $location    The location of the business to query
-	 * @param 	 $offset	  The query offset
+	 * @param     $term        The search term to query
+	 * @param     $location    The location of the business to query
+	 * @param     $offset      The query offset
 	 */
 	public function getPlaces($term, $location, $offset = 0)
 	{
 		$rawResponse = $this->callApi($term, $location, $offset);
 		$response = json_decode($rawResponse);
-//		$rawResponse = $this->getBusiness($businessId);
-//		$response = json_decode($rawResponse);
+		//		$rawResponse = $this->getBusiness($businessId);
+		//		$response = json_decode($rawResponse);
 		$this->dbLogger->flush();
-		
+
 		return $response;
 	}
 
 	/**
 	 * Query the Search API by a search term and location
 	 *
-	 * @param    $term        The search term passed to the API
-	 * @param    $location    The search location passed to the API
-	 * @param 	 $offset	  The query offset
+	 * @param     $term        The search term passed to the API
+	 * @param     $location    The search location passed to the API
+	 * @param     $offset      The query offset
 	 * @return   The JSON response from the request
 	 */
 	private function callApi($term, $location, $offset)

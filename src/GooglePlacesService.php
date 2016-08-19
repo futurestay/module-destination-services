@@ -20,12 +20,12 @@ class GooglePlacesService
 	/** @var DestinationApiLogger $dbLogger */
 	private $dbLogger;
 
-	public function __construct()
+	public function __construct(ADestinationApiLogger $dbLogger)
 	{
 		\Logger::configure(__DIR__ . '/../Config/logger.d/destination_content.xml');
 		$this->log = \Logger::getLogger('googleDestinationContentLogger');
 
-		$this->dbLogger = new \Services\DestinationApiLogger();
+		$this->dbLogger = $dbLogger;
 		$this->dbLogger->setServiceType(DestinationTileAPIs::GOOGLE_PLACES);
 	}
 

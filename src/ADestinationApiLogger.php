@@ -2,7 +2,7 @@
 
 namespace DestinationServicesModule;
 
-abstract class DestinationApiLogger
+abstract class ADestinationApiLogger
 {
 
 	private $data = array(
