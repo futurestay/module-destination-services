@@ -1,0 +1,32 @@
+<configuration xmlns="http://logging.apache.org/log4php/">
+    <appender name="yelpDestinationContentAppender" class="LoggerAppenderFile">
+        <param name="file" value="/home/futurest/logs/destinationContentTile.log" />
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date IP:%server{REMOTE_ADDR} %level %F,%L %message%newline" />
+        </layout>
+    </appender>
+    <logger name="yelpDestinationContentLogger">
+        <level value="DEBUG" />
+        <appender_ref ref="yelpDestinationContentAppender" />
+    </logger>
+    <appender name="googleDestinationContentAppender" class="LoggerAppenderFile">
+        <param name="file" value="/home/futurest/logs/destinationContentTile.log" />
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date IP:%server{REMOTE_ADDR} %level %F,%L %message%newline" />
+        </layout>
+    </appender>
+    <logger name="googleDestinationContentLogger">
+        <level value="DEBUG" />
+        <appender_ref ref="googleDestinationContentAppender" />
+    </logger>
+    <appender name="googlePhotosAppender" class="LoggerAppenderFile">
+        <param name="file" value="/home/futurest/logs/destinationContentTile.log" />
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date IP:%server{REMOTE_ADDR} %level %F,%L %message%newline" />
+        </layout>
+    </appender>
+    <logger name="googlePhotosLogger">
+        <level value="DEBUG" />
+        <appender_ref ref="googlePhotosAppender" />
+    </logger>
+</configuration>

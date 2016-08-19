@@ -25,7 +25,7 @@ class YelpService
 
 	public function __construct()
 	{
-		\Logger::configure(__DIR__ . '/../Config/logger.d/destination_content.xml');
+		\Logger::configure(__DIR__ . '/../config/destination_content.xml');
 		$this->log = \Logger::getLogger('yelpDestinationContentLogger');
 
 		$this->dbLogger = new \Services\DestinationApiLogger();
