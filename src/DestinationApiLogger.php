@@ -2,10 +2,7 @@
 
 namespace DestinationServicesModule;
 
-// require model file
-require_once(__DIR__ . "/../public_html/manage/Models/tilesModel.php");
-
-class DestinationApiLogger
+abstract class DestinationApiLogger
 {
 
 	private $data = array(
@@ -15,15 +12,10 @@ class DestinationApiLogger
 		'response_data' => NULL
 	);
 
-	public function __construct()
+	public function __construct($fsid)
 	{
-		$this->data['fsid'] = $_SESSION['FSID'];
+		$this->data['fsid'] = $fsid;
 	}
-
-	//	public function setFsid($fsid)
-	//	{
-	//		$this->data['fsid'] = $fsid;
-	//	}
 
 	public function setServiceType($service)
 	{
@@ -40,10 +32,10 @@ class DestinationApiLogger
 		$this->data['response_data'] = str_replace(array("\r\n", "\n", "\r"), '', $data);
 	}
 
-	public function flush()
-	{
-		\Services\DbHandler::connectToMainDB();
-		$success = saveDestinationLogEntry($this->data);
-	}
-
+	/**
+	 * need to be implemented in frontend and backend separately
+	 *
+	 * @return mixed
+	 */
+	abstract public function flush();
 }
