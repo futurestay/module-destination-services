@@ -1,0 +1,6 @@
+{
+  "name": "futurestay/module-destination-services",
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}
