@@ -1,6 +1,6 @@
 <?php
 
-namespace Services;
+namespace DestinationServicesModule;
 
 use Config\Container;
 use ConstantsModule\DestinationTileAPIs;

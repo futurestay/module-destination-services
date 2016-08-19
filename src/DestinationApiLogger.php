@@ -1,6 +1,6 @@
 <?php
 
-namespace Services;
+namespace DestinationServicesModule;
 
 // require model file
 require_once(__DIR__ . "/../public_html/manage/Models/tilesModel.php");
