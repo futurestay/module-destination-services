@@ -2,7 +2,6 @@
 
 namespace DestinationServicesModule;
 
-use Config\Container;
 use ConstantsModule\DestinationTileAPIs;
 
 class GooglePhotoService
@@ -17,10 +16,11 @@ class GooglePhotoService
 	private $log;
 	/** @var DestinationApiLogger $dbLogger */
 	private $dbLogger;
+	private $settings;
 
 	public function __construct(ADestinationApiLogger $dbLogger)
 	{
-		\Logger::configure(__DIR__ . '/../Config/logger.d/destination_content.xml');
+		\Logger::configure(__DIR__ . '/../config/destination_content.xml');
 		$this->log = \Logger::getLogger('googlePhotosLogger');
 
 		$this->dbLogger = $dbLogger;
@@ -86,7 +86,7 @@ class GooglePhotoService
 			$params['maxwidth'] = $maxWidth;
 		}
 		$params['photoreference'] = $photoReference;
-		$params['key'] = Container::$config['google_places_key'];
+		$params['key'] = $this->settings['googlePlacesKey'];
 		$url = self::API_URL . self::METHOD . "?" . http_build_query($params);
 
 		return $url;
@@ -96,5 +96,12 @@ class GooglePhotoService
 	{
 		preg_match("#href=['|\"](.*)['|\"]#i", $rawHtml, $matches);
 		return $matches[1];
+	}
+
+	public function setSettings($googlePlacesKey)
+	{
+		$this->settings = array(
+			'googlePlacesKey'    => $googlePlacesKey,
+		);
 	}
 }
