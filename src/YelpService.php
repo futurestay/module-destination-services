@@ -51,6 +51,23 @@ class YelpService
 	}
 
 	/**
+	 * Query the Business API by business_id
+	 *
+	 * @param    $businessId    The ID of the business to query
+	 * @return   The JSON response from the request
+	 */
+	public function getDetails($businessId)
+	{
+		$businessPath = self::BUSINESS_PATH . urlencode($businessId);
+		$rawResponse = $this->request(self::API_HOST, $businessPath);
+		$response = json_decode($rawResponse);
+
+		$this->dbLogger->flush();
+		
+		return $response;
+	}
+
+	/**
 	 * Query the Search API by a search term and location
 	 *
 	 * @param     $term        The search term passed to the API
@@ -70,20 +87,6 @@ class YelpService
 
 		return $this->request(self::API_HOST, $searchPath);
 	}
-
-	/**
-	 * Query the Business API by business_id
-	 *
-	 * @param    $businessId    The ID of the business to query
-	 * @return   The JSON response from the request
-	 */
-	public function getBusiness($businessId)
-	{
-		$businessPath = self::BUSINESS_PATH . urlencode($businessId);
-
-		return $this->request(self::API_HOST, $businessPath);
-	}
-
 
 	/**
 	 * Makes a request to the Yelp API and returns the response
