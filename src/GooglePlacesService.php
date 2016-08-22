@@ -2,7 +2,6 @@
 
 namespace DestinationServicesModule;
 
-use Config\Container;
 use ConstantsModule\DestinationTileAPIs;
 
 class GooglePlacesService
@@ -19,10 +18,11 @@ class GooglePlacesService
 	private $log;
 	/** @var DestinationApiLogger $dbLogger */
 	private $dbLogger;
+	private $settings;
 
 	public function __construct(ADestinationApiLogger $dbLogger)
 	{
-		\Logger::configure(__DIR__ . '/../Config/logger.d/destination_content.xml');
+		\Logger::configure(__DIR__ . '/../config/destination_content.xml');
 		$this->log = \Logger::getLogger('googleDestinationContentLogger');
 
 		$this->dbLogger = $dbLogger;
@@ -108,6 +108,13 @@ class GooglePlacesService
 		$params['key'] = Container::$config['google_places_key'];
 
 		return self::API_URL . self::DETAILS_METHOD . "/" . self::OUTPUT_FORMAT . "?" . http_build_query($params);
+	}
+
+	public function setSettings($googlePlacesKey)
+	{
+		$this->settings = array(
+			'googlePlacesKey'    => $googlePlacesKey,
+		);
 	}
 
 }
