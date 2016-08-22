@@ -96,7 +96,7 @@ class GooglePlacesService
 		} else {
 			$params['pagetoken'] = $nextPageToken;
 		}
-		$params['key'] = Container::$config['google_places_key'];
+		$params['key'] =  $this->settings['googlePlacesKey'];
 
 		return self::API_URL . self::SEARCH_METHOD . "/" . self::OUTPUT_FORMAT . "?" . http_build_query($params);
 	}
@@ -105,7 +105,7 @@ class GooglePlacesService
 	{
 		$params['placeid'] = $placeId;
 		//$params['extensions'] = 'review_summary';
-		$params['key'] = Container::$config['google_places_key'];
+		$params['key'] = $this->settings['googlePlacesKey'];
 
 		return self::API_URL . self::DETAILS_METHOD . "/" . self::OUTPUT_FORMAT . "?" . http_build_query($params);
 	}
