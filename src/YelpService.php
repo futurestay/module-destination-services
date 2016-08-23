@@ -63,7 +63,7 @@ class YelpService
 		$response = json_decode($rawResponse);
 
 		$this->dbLogger->flush();
-		
+
 		return $response;
 	}
 
@@ -151,6 +151,26 @@ class YelpService
 			'token'          => $token,
 			'secret'         => $secret
 		);
+	}
+
+	/**
+	 * OTHER SIZES:
+	 *
+	 * s.jpg: up to 40×40
+	 * ss.jpg: 40×40 square
+	 * m.jpg: up to 100×100
+	 * ms.jpg: 100×100 square
+	 * l.jpg: up to 600×400
+	 * ls.jpg: 250×250 square
+	 * o.jpg: up to 1000×1000
+	 * 348s.jpg: 348×348 square
+	 *
+	 * @param $url
+	 * @param $size
+	 */
+	public function changeImageSize($url, $size)
+	{
+		return preg_replace('#(.*)\/.*\.jpg$#i', '$1/' . $size . '.jpg', $url);
 	}
 
 }
