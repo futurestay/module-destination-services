@@ -95,13 +95,13 @@ class GooglePhotoService
 	private function parseImageUrlOut($rawHtml)
 	{
 		preg_match("#href=['|\"](.*)['|\"]#i", $rawHtml, $matches);
-		return $matches[1];
+		return isset($matches[1]) ? $matches[1] : NULL;
 	}
 
 	public function setSettings($googlePlacesKey)
 	{
 		$this->settings = array(
-			'googlePlacesKey'    => $googlePlacesKey,
+			'googlePlacesKey' => $googlePlacesKey,
 		);
 	}
 }
