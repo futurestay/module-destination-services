@@ -40,7 +40,6 @@ class GooglePhotoService
 		// which results into 3 redirects (4 requests) for 1 image!!
 		// so I parse out actual image url from raw html
 		$rawHtml = $this->callApi($imageUrl);
-		$this->dbLogger->flush();
 
 		$finalImageUrl = $this->parseImageUrlOut($rawHtml);
 
