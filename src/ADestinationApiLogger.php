@@ -7,9 +7,10 @@ abstract class ADestinationApiLogger
 
 	protected $data = array(
 		'fsid'          => NULL,
+		'caller'        => NULL,
 		'service_type'  => NULL,
 		'called_url'    => NULL,
-		'response_data' => NULL
+		'response_data' => NULL,
 	);
 
 	public function __construct($fsid)
@@ -30,6 +31,11 @@ abstract class ADestinationApiLogger
 	public function setResponseData($data)
 	{
 		$this->data['response_data'] = str_replace(array("\r\n", "\n", "\r"), '', $data);
+	}
+
+	public function setCaller($caller)
+	{
+		$this->data['caller'] = $caller;
 	}
 
 	/**
