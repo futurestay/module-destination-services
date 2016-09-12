@@ -34,7 +34,7 @@ class GooglePhotoService
 			return $this->getImage($photoData->photo_reference, $maxHeight, $maxWidth);
 		}
 
-		return "//www.placehold.it/200x200?text=no+image";
+		return "//www.placehold.it/" . $maxHeight . "x" . $maxWidth . "?text=no+image";
 	}
 
 	public function getImage($photoReference, $maxHeight = NULL, $maxWidth = NULL)
