@@ -27,6 +27,16 @@ class GooglePhotoService
 		$this->dbLogger->setServiceType(DestinationTileAPIs::GOOGLE_PHOTOS);
 	}
 
+	public function getFirstImage($place, $maxHeight = NULL, $maxWidth = NULL)
+	{
+		if (isset($place->photos)) {
+			$photoData = array_shift($place->photos);
+			return $this->getImage($photoData->photo_reference, $maxHeight, $maxWidth);
+		}
+
+		return "";
+	}
+
 	public function getImage($photoReference, $maxHeight = NULL, $maxWidth = NULL)
 	{
 		if (!$photoReference) {
