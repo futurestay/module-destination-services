@@ -11,6 +11,10 @@ class GooglePhotoService
 	const METHOD = "photo";
 	//
 	const ERROR_RESULTS = 'error';
+	//
+	const SETTINGS_AREA = 'settings_area';
+	const FRONTEND_TAGS_LAYOUT = 'tags_layout';
+	const FRONTEND_OTHER_LAYOUTS = 'other_layouts';
 
 	/** @var $log Logger */
 	private $log;
@@ -27,15 +31,16 @@ class GooglePhotoService
 		$this->dbLogger->setServiceType(DestinationTileAPIs::GOOGLE_PHOTOS);
 	}
 
-	public function getFirstImage($place, $maxHeight = NULL, $maxWidth = NULL)
+	public function getFirstImage($place, $maxHeight = NULL, $maxWidth = NULL, $area)
 	{
 		if (isset($place->photos)) {
 			$photoData = array_shift($place->photos);
 			return $this->getImage($photoData->photo_reference, $maxHeight, $maxWidth);
+		} elseif ($area == self::SETTINGS_AREA || $area == self::FRONTEND_TAGS_LAYOUT) {
+			return "/images/destination-services/no_image_small.png";
+		} elseif ($area == self::FRONTEND_OTHER_LAYOUTS) {
+			return "/images/destination-services/no_image_large.png";
 		}
-
-//		return "//www.placehold.it/" . $maxHeight . "x" . $maxWidth . "?text=no+image";
-		return "/images/destination-services/no_image.jpg";
 	}
 
 	public function getImage($photoReference, $maxHeight = NULL, $maxWidth = NULL)
