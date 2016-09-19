@@ -92,7 +92,12 @@ class GooglePlacesService
 	private function buildSearchQuery($term, $location, $nextPageToken = NULL)
 	{
 		if (!$nextPageToken) {
-			$params['query'] = $term . " in " . $location;
+			if ($term) {
+				$params['query'] = $term . " in " . $location;
+			} else {
+				$params['query'] = $location;
+				$params['type'] = 'restaurant';
+			}
 		} else {
 			$params['pagetoken'] = $nextPageToken;
 		}
