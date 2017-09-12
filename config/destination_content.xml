@@ -1,6 +1,6 @@
 <configuration xmlns="http://logging.apache.org/log4php/">
     <appender name="yelpDestinationContentAppender" class="LoggerAppenderFile">
-        <param name="file" value="/home/futurest/logs/destinationContentTile.log" />
+        <param name="file" value="/home/futurest/logs2/destinationContentTile.log" />
         <layout class="LoggerLayoutPattern">
             <param name="conversionPattern" value="%date IP:%server{REMOTE_ADDR} %level %F,%L %message%newline" />
         </layout>
@@ -10,7 +10,7 @@
         <appender_ref ref="yelpDestinationContentAppender" />
     </logger>
     <appender name="googleDestinationContentAppender" class="LoggerAppenderFile">
-        <param name="file" value="/home/futurest/logs/destinationContentTile.log" />
+        <param name="file" value="/home/futurest/logs2/destinationContentTile.log" />
         <layout class="LoggerLayoutPattern">
             <param name="conversionPattern" value="%date IP:%server{REMOTE_ADDR} %level %F,%L %message%newline" />
         </layout>
@@ -20,7 +20,7 @@
         <appender_ref ref="googleDestinationContentAppender" />
     </logger>
     <appender name="googlePhotosAppender" class="LoggerAppenderFile">
-        <param name="file" value="/home/futurest/logs/destinationContentTile.log" />
+        <param name="file" value="/home/futurest/logs2/destinationContentTile.log" />
         <layout class="LoggerLayoutPattern">
             <param name="conversionPattern" value="%date IP:%server{REMOTE_ADDR} %level %F,%L %message%newline" />
         </layout>
